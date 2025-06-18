@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des produits</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 30px;
+            color: #333;
+        }
+
+        h1 {
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        li {
+            background: #fff;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 5px solid #4CAF50;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .actions a {
+            margin-left: 10px;
+            color: #007BFF;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .actions a:hover {
+            text-decoration: underline;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .buttons a {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .buttons a:hover {
+            background: #45a049;
+        }
+
+        .empty {
+            text-align: center;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <h1>Produits enregistrés</h1>
+
+    <ul>
+        {% for produit in produits %}
+            <li>
+                <span>{{ produit.nom }} – {{ produit.prix }} € – Péremption : {{ produit.date_peremption }}</span>
+                <span class="actions">
+                    <a href="{% url 'modifier_produit' produit.id %}">Modifier</a>
+                    <a href="{% url 'supprimer_produit' produit.id %}">Supprimer</a>
+                </span>
+            </li>
+        {% empty %}
+            <p class="empty">⚠️ Aucun produit enregistré.</p>
+        {% endfor %}
+    </ul>
+
+    <div class="buttons">
+        <a href="{% url 'ajouter_produit' %}">➕ Ajouter un produit</a>
+        <a href="{% url 'creer_facture' %}">🧾 Créer une facture</a>
+        <a href="{% url 'liste_factures' %}">📄 Voir les factures</a>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Supprimer un produit</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #fefefe;
+            padding: 40px;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            background: #fff;
+            border: 1px solid #ddd;
+            display: inline-block;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #d9534f;
+        }
+
+        p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        form button {
+            background: #d9534f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background: #c9302c;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #555;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Supprimer ce produit ?</h1>
+        <p>Es-tu sûr(e) de vouloir supprimer <strong>{{ produit.nom }}</strong> ?</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit">🗑️ Supprimer</button>
+        </form>
+
+        <a href="{% url 'liste_produits' %}">Annuler</a>
+    </div>
+</body>
+</html>

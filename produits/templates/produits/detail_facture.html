@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail de la facture</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            padding: 40px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .infos {
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f9f9f9;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            border-left: 4px solid #4CAF50;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .total {
+            margin-top: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: right;
+        }
+
+        a {
+            display: block;
+            margin-top: 25px;
+            text-align: center;
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Facture #{{ facture.id }}</h1>
+
+        <div class="infos">
+            <p>📅 Date de création : {{ facture.date_creation }}</p>
+            <p>🧾 Nombre de produits : {{ lignes|length }}</p>
+        </div>
+
+        {% if lignes %}
+            <ul>
+                {% for ligne in lignes %}
+                    <li>
+                        <span>{{ ligne.nom_produit }}</span>
+                        <span>{{ ligne.prix_unitaire }} €</span>
+                    </li>
+                {% endfor %}
+
+            </ul>
+        {% else %}
+            <p>Aucun produit sélectionné.</p>
+        {% endif %}
+
+        <p class="total">Total à payer : {{ total }} €</p>
+
+        <a href="{% url 'liste_factures' %}">⬅ Retour aux factures</a>
+    </div>
+</body>
+</html>

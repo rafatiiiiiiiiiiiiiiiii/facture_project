@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des factures</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            padding: 40px;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #fff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background: #4CAF50;
+            color: white;
+        }
+
+        a.btn {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .voir {
+            background: #2196F3;
+        }
+
+        .modifier {
+            background: #FFC107;
+            color: #333;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .toplink {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .toplink a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .toplink a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Liste des factures</h1>
+
+    {% if factures %}
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Date</th>
+                <th>Nombre de produits</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+            {% for facture in factures %}
+                <tr>
+                    <td>#{{ facture.id }}</td>
+                    <td>{{ facture.date_creation|date:"d/m/Y H:i" }}</td>
+                    <td>{{ facture.produits.count }}</td>
+                    <td>{{ facture.total }} €</td>
+                    <td>
+                        <a class="btn voir" href="{% url 'detail_facture' facture.id %}">Voir</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p style="text-align: center;">Aucune facture enregistrée.</p>
+    {% endif %}
+
+    <div class="toplink">
+        <a href="{% url 'liste_produits' %}">⬅ Retour à l'accueil</a>
+    </div>
+</body>
+</html>
